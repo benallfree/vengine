@@ -1,15 +1,16 @@
-import { useEffect, useRef } from 'react'
 import { useFrame } from '@react-three/fiber'
-import { useSnapshot } from 'valtio'
+import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
-import { socket, state } from '../../App'
+import { useSnapshot } from 'valtio'
+import { gameState } from '../../store/gameState'
+import { LocalPlayer } from './LocalPlayer'
 
 const SPHERE_RADIUS = 2
 const ROTATION_SPEED = 0.001
 
 export const World = () => {
   const sphereRef = useRef<THREE.Mesh>(null)
-  const snap = useSnapshot(state)
+  const snap = useSnapshot(gameState)
 
   useEffect(() => {
     // Create text texture for sphere
@@ -66,6 +67,8 @@ export const World = () => {
       </mesh>
 
       <gridHelper args={[50, 50, '#666666', '#444444']} />
+
+      <LocalPlayer />
     </>
   )
 }

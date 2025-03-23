@@ -8,6 +8,14 @@
 - react-three-fiber
 - Three.js
 - Vite + TypeScript
+- Prettier for code formatting
+  - No semicolons
+  - ES5 trailing commas
+  - Organized imports with custom ordering
+  - Configured via `.prettierrc`
+  - Available commands:
+    - `bun run format` - Format all files
+    - `bun run format:check` - Check formatting without modifying files
 - vanilla-extract for CSS-in-TS
 
   - All styles must be in separate `.css.ts` files

@@ -1,21 +1,22 @@
+import { gameState } from '@/store/gameState'
 import { useSnapshot } from 'valtio'
-import { state } from '../../App'
 import * as styles from './styles.css'
 
 export const Splash = () => {
-  const snap = useSnapshot(state)
+  const snap = useSnapshot(gameState)
 
   const handlePlay = () => {
     if (!snap.connected) return
-    state.inGame = true
+    gameState.inGame = true
   }
 
   return (
     <div className={styles.container}>
+      {snap.connected ? 'foo' : 'bar'}
       <h1 className={styles.title}>Vibe Portal</h1>
 
       <div className={styles.status}>
-        <div className={styles.indicator(snap.connected)} />
+        <div className={styles.indicator({ connected: snap.connected })} />
         <span>{snap.connected ? 'Connected' : 'Connecting...'}</span>
       </div>
 
@@ -24,7 +25,7 @@ export const Splash = () => {
       </div>
 
       <button
-        className={styles.playButton(snap.connected)}
+        className={styles.playButton({ connected: snap.connected })}
         onClick={handlePlay}
         disabled={!snap.connected}
       >

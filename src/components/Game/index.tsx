@@ -1,8 +1,8 @@
 import { Canvas } from '@react-three/fiber'
-import { World } from './World'
 import { Controls } from './Controls'
 import { HUD } from './HUD'
 import * as styles from './styles.css'
+import { World } from './World'
 
 export const Game = () => {
   return (
@@ -17,8 +17,8 @@ export const Game = () => {
         }}
       >
         <World />
+        <Controls />
       </Canvas>
-      <Controls />
       <HUD />
     </div>
   )
