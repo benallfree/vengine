@@ -1,0 +1,39 @@
+{
+  "name": "vibe-portal",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently \"bun run dev:client\" \"bun run dev:server\"",
+    "dev:client": "vite",
+    "dev:server": "bun run --watch server/index.ts",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^9.1.0",
+    "@types/three": "^0.174.0",
+    "@vanilla-extract/css": "^1.17.1",
+    "@vanilla-extract/recipes": "^0.5.5",
+    "express": "^4.21.2",
+    "nipplejs": "^0.10.2",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "three": "^0.174.0",
+    "valtio": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/react": "^19.0.12",
+    "@types/react-dom": "^19.0.4",
+    "@vanilla-extract/vite-plugin": "^5.0.1",
+    "@vitejs/plugin-react": "^4.3.4",
+    "concurrently": "^9.1.2",
+    "typescript": "^5.8.2",
+    "vite": "^6.2.2",
+    "@types/bun": "^1.2.5"
+  },
+  "module": "index.ts"
+}
