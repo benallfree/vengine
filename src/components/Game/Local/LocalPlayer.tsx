@@ -1,9 +1,9 @@
+import { localPlayerState } from '@/store/gameState'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useRef } from 'react'
 import { Mesh, Vector3 } from 'three'
 import { useSnapshot } from 'valtio'
-import { localPlayerState } from '../../store/gameState'
-import { Player } from './Player'
+import { Player } from '../Player'
 
 const MOVEMENT_SPEED = 5 // units per second
 const moveDirection = new Vector3()

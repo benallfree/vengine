@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { useSnapshot } from 'valtio'
 import { gameState } from '../../store/gameState'
-import { LocalPlayer } from './LocalPlayer'
+import { LocalPlayer } from './Local/LocalPlayer'
 
 const SPHERE_RADIUS = 2
 const ROTATION_SPEED = 0.001

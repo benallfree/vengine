@@ -1,6 +1,6 @@
 import { gameState } from '@/store/gameState'
 import { useSnapshot } from 'valtio'
-import * as styles from './styles.css'
+import * as styles from './HUD.css'
 
 export const HUD = () => {
   const snap = useSnapshot(gameState)

@@ -1,31 +1,6 @@
 import { style } from '@vanilla-extract/css'
 import { vars } from '../../styles/theme.css'
 
-export const container = style({
-  width: '100%',
-  height: '100%',
-  position: 'relative',
-})
-
-export const joystick = style({
-  position: 'absolute',
-  bottom: '20px',
-  width: '120px',
-  height: '120px',
-  opacity: 0.5,
-  ':first-child': {
-    left: '20px',
-  },
-  ':last-child': {
-    right: '20px',
-  },
-  '@media': {
-    '(min-width: 768px)': {
-      display: 'none',
-    },
-  },
-})
-
 export const hud = style({
   position: 'absolute',
   top: 0,
