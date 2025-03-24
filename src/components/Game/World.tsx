@@ -2,8 +2,8 @@ import { useFrame } from '@react-three/fiber'
 import { useEffect, useRef } from 'react'
 import * as THREE from 'three'
 import { useSnapshot } from 'valtio'
-import { gameState } from '../../store/gameState'
 import { LocalPlayer } from './Local/LocalPlayer'
+import { gameState } from './state'
 
 const SPHERE_RADIUS = 2
 const ROTATION_SPEED = 0.001

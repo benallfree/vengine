@@ -1,4 +1,4 @@
-import { gameState } from '@/store/gameState'
+import { gameState } from '@/components/Game/state'
 import { useSnapshot } from 'valtio'
 import * as styles from './styles.css'
 

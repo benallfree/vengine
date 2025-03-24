@@ -1,8 +1,8 @@
 import { useSnapshot } from 'valtio'
 import { Game } from './components/Game'
+import { gameState } from './components/Game/state'
 import { Network } from './components/Network'
 import { Splash } from './components/Splash'
-import { gameState } from './store/gameState'
 
 const App = () => {
   const snap = useSnapshot(gameState)

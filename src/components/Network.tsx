@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { io } from 'socket.io-client'
-import { gameState } from '../store/gameState'
+import { gameState } from './Game/state'
 
 // Socket connection - moved from App.tsx
 export const socket = io()

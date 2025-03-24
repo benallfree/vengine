@@ -1,7 +1,6 @@
 import { Canvas } from '@react-three/fiber'
 import * as styles from './Game.css'
 import { HUD } from './HUD'
-import { Controls } from './Local/Controls'
 import { World } from './World'
 
 export const Game = () => {
@@ -25,7 +24,6 @@ export const Game = () => {
         }}
       >
         <World />
-        <Controls />
       </Canvas>
       <HUD />
     </div>

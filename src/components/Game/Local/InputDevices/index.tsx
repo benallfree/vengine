@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
-import { MobileControls } from './MobileControls'
-import { MouseControls } from './MouseControls'
+import { Desktop } from './Desktop'
+import { Touch } from './Touch'
 
 const isMobile = () => window.matchMedia('(max-width: 768px)').matches
 
-export const Controls = () => {
+export const InputDevices = () => {
   const [isOnMobile, setIsOnMobile] = useState(isMobile())
 
   useEffect(() => {
@@ -15,5 +15,5 @@ export const Controls = () => {
     return () => mediaQuery.removeEventListener('change', handleChange)
   }, [])
 
-  return isOnMobile ? <MobileControls /> : <MouseControls />
+  return isOnMobile ? <Touch /> : <Desktop />
 }

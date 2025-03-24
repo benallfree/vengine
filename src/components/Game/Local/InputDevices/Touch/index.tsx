@@ -1,9 +1,9 @@
-import { localPlayerState } from '@/store/gameState'
 import { Html } from '@react-three/drei'
 import { useThree } from '@react-three/fiber'
 import nipplejs from 'nipplejs'
 import { useEffect, useRef } from 'react'
-import * as styles from './MobileControls.css'
+import { localPlayerState } from '../../state'
+import * as styles from './style.css'
 
 const MOVEMENT_THRESHOLD = 0.1
 const LOOK_THRESHOLD = 0.1
@@ -15,7 +15,7 @@ const MIN_LOOK_ANGLE = (5 * Math.PI) / 180
 const exceedsLookThreshold = (value: number) =>
   Math.abs(value) >= MIN_LOOK_ANGLE
 
-export const MobileControls = () => {
+export const Touch = () => {
   const leftJoystickRef = useRef<HTMLDivElement>(null)
   const rightJoystickRef = useRef<HTMLDivElement>(null)
   const { camera } = useThree()
