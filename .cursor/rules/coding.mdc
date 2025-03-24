@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+* use early returns
+* use factory functions
+* use valtio instead of context stores or other react stores
+* use r3f instead of raw ThreeJS
