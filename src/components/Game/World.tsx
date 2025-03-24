@@ -26,7 +26,7 @@ export const World = () => {
     context.fillStyle = '#ffffff'
     context.textAlign = 'center'
     context.textBaseline = 'middle'
-    context.fillText('VIBE PORTAL', canvas.width / 2, canvas.height / 2)
+    context.fillText('VENGINE', canvas.width / 2, canvas.height / 2)
 
     const texture = new THREE.CanvasTexture(canvas)
     if (sphereRef.current) {

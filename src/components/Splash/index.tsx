@@ -13,7 +13,7 @@ export const Splash = () => {
   return (
     <div className={styles.container}>
       {snap.connected ? 'foo' : 'bar'}
-      <h1 className={styles.title}>Vibe Portal</h1>
+      <h1 className={styles.title}>vEngine</h1>
 
       <div className={styles.status}>
         <div className={styles.indicator({ connected: snap.connected })} />

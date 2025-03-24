@@ -1,4 +1,4 @@
-# Vibe Portal
+# vEngine
 
 A 3D multiplayer experience built with React Three Fiber and Socket.IO.
 

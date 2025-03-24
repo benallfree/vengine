@@ -19,7 +19,7 @@ interface PlayerProps {
 export const Player = forwardRef<Mesh, PlayerProps>(
   (
     {
-      position = [0, 1, 0],
+      position = [0, PLAYER_HEIGHT, 0],
       color = '#ff0000',
       height = PLAYER_HEIGHT,
       radius = PLAYER_RADIUS,

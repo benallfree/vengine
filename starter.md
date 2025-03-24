@@ -1,4 +1,4 @@
-# Vibe Portal - 3D Multiplayer Experience
+# vEngine - 3D Multiplayer Experience
 
 ## Tech Stack
 
