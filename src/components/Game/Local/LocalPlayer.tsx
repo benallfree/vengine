@@ -2,21 +2,11 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { useRef } from 'react'
 import { Mesh, Vector3 } from 'three'
 import { useSnapshot } from 'valtio'
-import { BASE_MOVEMENT_SPEED, Player, PLAYER_HEIGHT } from '../Player'
+import { BASE_MOVEMENT_SPEED, Player } from '../Player'
 import { localPlayerActions } from './actions'
+import { THIRD_PERSON_DISTANCE, THIRD_PERSON_HEIGHT } from './constants'
 import { InputDevices } from './InputDevices'
 import { CameraMode, localPlayerState } from './state'
-
-// Camera positioning relative to player
-const EYE_HEIGHT = PLAYER_HEIGHT * 0.85 // Approximately at eye level
-export const THIRD_PERSON_DISTANCE = 5
-export const THIRD_PERSON_HEIGHT = 2
-export const THIRD_PERSON_OFFSET = new Vector3(
-  0,
-  THIRD_PERSON_HEIGHT,
-  -THIRD_PERSON_DISTANCE
-)
-export const FPS_OFFSET = new Vector3(0, EYE_HEIGHT, 0)
 
 // Temporary vector for calculations
 const targetPosition = new Vector3()

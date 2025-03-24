@@ -1,5 +1,5 @@
 import { Camera, Vector3 } from 'three'
-import { FPS_OFFSET, THIRD_PERSON_OFFSET } from './LocalPlayer'
+import { FPS_OFFSET, THIRD_PERSON_OFFSET } from './constants'
 import { CameraMode, localPlayerState } from './state'
 
 const CAMERA_TRANSITION_SPEED = 5 // units per second
