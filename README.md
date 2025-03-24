@@ -14,7 +14,27 @@ An open source starter kit specifically tuned for vibe coding and compatibility 
 - Player count display
 - Connection status indicator
 - Next game portal button
+- Splash screen with loading progress
+- Vibescale™ measurement and tracking
+- MMO position synchronization
+- Configurable camera modes:
+  - Third-person perspective
+  - First-person perspective
+- Portal system:
+  - Entry portals
+  - Exit portals
 - #vibejam 2025 compliant
+
+## VibeJam 2025 Compatibility
+
+vEngine is fully compliant with #vibejam 2025 requirements:
+
+- 🤖 100% AI-authored source code
+- 🌐 Instant web access - no login, no signup, free-to-play
+- 🚀 Ready for fly.io deployment (your-domain.fly.dev)
+- 👥 Built-in multiplayer functionality
+- 🎮 ThreeJS-powered 3D engine
+- ⚡ Zero loading screens or heavy downloads - instant play
 
 ## Tech Stack
 
