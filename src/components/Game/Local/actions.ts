@@ -24,8 +24,8 @@ export const localPlayerActions = {
     moveDirection.set(0, 0, 0)
 
     // Add movement based on active controls
-    if (localPlayerState.controls.move.forward) moveDirection.z += 1
-    if (localPlayerState.controls.move.backward) moveDirection.z -= 1
+    if (localPlayerState.controls.move.forward) moveDirection.z -= 1
+    if (localPlayerState.controls.move.backward) moveDirection.z += 1
     if (localPlayerState.controls.move.left) moveDirection.x -= 1
     if (localPlayerState.controls.move.right) moveDirection.x += 1
 

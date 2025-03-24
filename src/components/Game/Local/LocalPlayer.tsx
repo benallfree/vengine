@@ -5,7 +5,7 @@ import { useSnapshot } from 'valtio'
 import { BASE_MOVEMENT_SPEED, Player, PLAYER_HEIGHT } from '../Player'
 import { localPlayerActions } from './actions'
 import { InputDevices } from './InputDevices'
-import { localPlayerState } from './state'
+import { CameraMode, localPlayerState } from './state'
 
 // Camera positioning relative to player
 const EYE_HEIGHT = PLAYER_HEIGHT * 0.85 // Approximately at eye level
@@ -38,21 +38,37 @@ export const LocalPlayer = () => {
     // Update position
     playerRef.current.position.add(moveDirection)
 
-    // Update rotation to match camera's Y rotation only
-    playerRef.current.quaternion.copy(camera.quaternion)
-    // Reset X and Z rotation to keep player upright
-    playerRef.current.rotation.x = 0
-    playerRef.current.rotation.z = 0
+    if (snap.camera.mode === CameraMode.THIRD_PERSON) {
+      // In third person, player rotation follows camera's Y rotation
+      playerRef.current.rotation.y = camera.rotation.y
+    } else {
+      // In FPS mode, player fully matches camera rotation
+      playerRef.current.quaternion.copy(camera.quaternion)
+      // Reset X and Z rotation to keep player upright
+      playerRef.current.rotation.x = 0
+      playerRef.current.rotation.z = 0
+    }
 
     // Update camera transition and position
     localPlayerActions.updateCameraTransition(delta)
 
-    // Update camera position based on current offset
-    if (playerRef.current) {
+    if (snap.camera.mode === CameraMode.THIRD_PERSON) {
+      // Create offset vector pointing backward
+      const offset = new Vector3(0, THIRD_PERSON_HEIGHT, THIRD_PERSON_DISTANCE)
+
+      // Rotate offset based on player's Y rotation only
+      offset.applyAxisAngle(new Vector3(0, 1, 0), playerRef.current.rotation.y)
+
+      // Position camera behind player
+      camera.position.copy(playerRef.current.position).add(offset)
+
+      // Make camera look at player
+      camera.lookAt(playerRef.current.position)
+    } else {
       // Get player's current position
       targetPosition.copy(playerRef.current.position)
 
-      // Add the current camera offset
+      // For FPS mode, just add the offset directly
       targetPosition.x += snap.camera.currentOffset.x
       targetPosition.y += snap.camera.currentOffset.y
       targetPosition.z += snap.camera.currentOffset.z
