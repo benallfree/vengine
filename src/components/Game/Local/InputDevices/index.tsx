@@ -1,19 +1,16 @@
-import { useEffect, useState } from 'react'
-import { Desktop } from './Desktop'
-import { Touch } from './Touch'
-
-const isMobile = () => window.matchMedia('(max-width: 768px)').matches
+import { IsDesktop, IsTouch } from '../../Utils/DeviceDetection'
+import { DesktopController } from './Desktop/DesktopController'
+import { TouchController } from './Touch/TouchController'
 
 export const InputDevices = () => {
-  const [isOnMobile, setIsOnMobile] = useState(isMobile())
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 768px)')
-    const handleChange = (e: MediaQueryListEvent) => setIsOnMobile(e.matches)
-
-    mediaQuery.addEventListener('change', handleChange)
-    return () => mediaQuery.removeEventListener('change', handleChange)
-  }, [])
-
-  return isOnMobile ? <Touch /> : <Desktop />
+  return (
+    <>
+      <IsTouch>
+        <TouchController />
+      </IsTouch>
+      <IsDesktop>
+        <DesktopController />
+      </IsDesktop>
+    </>
+  )
 }

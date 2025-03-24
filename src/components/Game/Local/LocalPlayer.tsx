@@ -2,7 +2,7 @@ import { useFrame, useThree } from '@react-three/fiber'
 import { useRef } from 'react'
 import { Mesh, Vector3 } from 'three'
 import { useSnapshot } from 'valtio'
-import { BASE_MOVEMENT_SPEED, Player } from '../Player'
+import { Player } from '../Player'
 import { localPlayerActions } from './actions'
 import { THIRD_PERSON_DISTANCE, THIRD_PERSON_HEIGHT } from './constants'
 import { InputDevices } from './InputDevices'
@@ -20,10 +20,7 @@ export const LocalPlayer = () => {
     if (!playerRef.current) return
 
     // Calculate movement direction based on controls
-    const moveDirection = localPlayerActions.calculateMovement(camera)
-
-    // Apply movement speed and delta time
-    moveDirection.multiplyScalar(BASE_MOVEMENT_SPEED * delta)
+    const moveDirection = localPlayerActions.calculateMovement(camera, delta)
 
     // Update position
     playerRef.current.position.add(moveDirection)

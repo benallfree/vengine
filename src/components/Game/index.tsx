@@ -1,11 +1,12 @@
 import { Canvas } from '@react-three/fiber'
 import { HUD } from './HUD'
-import * as styles from './style.css'
+import { Joysticks } from './Local/InputDevices/Touch/Joysticks'
+import { IsTouch } from './Utils/DeviceDetection'
 import { World } from './World'
 
 export const Game = () => {
   return (
-    <div className={styles.container}>
+    <>
       <Canvas
         shadows
         camera={{
@@ -26,6 +27,9 @@ export const Game = () => {
         <World />
       </Canvas>
       <HUD />
-    </div>
+      <IsTouch>
+        <Joysticks />
+      </IsTouch>
+    </>
   )
 }

@@ -19,10 +19,12 @@ interface LocalPlayerState {
   }
   controls: {
     move: {
-      forward: boolean
-      backward: boolean
-      left: boolean
-      right: boolean
+      x: number
+      z: number
+    }
+    look: {
+      yaw: number
+      pitch: number
     }
   }
 }
@@ -38,10 +40,12 @@ export const localPlayerState = proxy<LocalPlayerState>({
   },
   controls: {
     move: {
-      forward: false,
-      backward: false,
-      left: false,
-      right: false,
+      x: 0,
+      z: 0,
+    },
+    look: {
+      yaw: 0,
+      pitch: 0,
     },
   },
 })

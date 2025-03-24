@@ -12,33 +12,25 @@ const lerpedOffset = new Vector3()
 const moveDirection = new Vector3()
 
 export const localPlayerActions = {
-  updateMovementState: (keys: Set<string>) => {
-    localPlayerState.controls.move.forward = keys.has('KeyW')
-    localPlayerState.controls.move.backward = keys.has('KeyS')
-    localPlayerState.controls.move.left = keys.has('KeyA')
-    localPlayerState.controls.move.right = keys.has('KeyD')
-  },
-
-  calculateMovement: (camera: Camera) => {
+  calculateMovement: (camera: Camera, delta: number) => {
     // Reset movement direction
     moveDirection.set(0, 0, 0)
 
-    // Add movement based on active controls
-    if (localPlayerState.controls.move.forward) moveDirection.z -= 1
-    if (localPlayerState.controls.move.backward) moveDirection.z += 1
-    if (localPlayerState.controls.move.left) moveDirection.x -= 1
-    if (localPlayerState.controls.move.right) moveDirection.x += 1
+    // Get normalized input values
+    const { x, z } = localPlayerState.controls.move
+
+    // Set movement direction from normalized input
+    moveDirection.set(x, 0, z)
 
     // If no movement, return zero vector
     if (moveDirection.lengthSq() === 0) return moveDirection
-
-    // Normalize movement vector
-    moveDirection.normalize()
 
     // Apply camera rotation to movement direction
     moveDirection.applyQuaternion(camera.quaternion)
     // Keep movement on the ground plane
     moveDirection.y = 0
+    // Apply base movement speed and delta time
+    moveDirection.multiplyScalar(BASE_MOVEMENT_SPEED * delta)
 
     return moveDirection
   },
