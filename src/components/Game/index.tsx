@@ -1,6 +1,6 @@
 import { Canvas } from '@react-three/fiber'
-import * as styles from './Game.css'
 import { HUD } from './HUD'
+import * as styles from './style.css'
 import { World } from './World'
 
 export const Game = () => {
