@@ -44,7 +44,7 @@ export const PortalParticles = ({
       .array as Float32Array
 
     for (let i = 0; i < positions.length; i += 3) {
-      const amplitude = radius * 0.00333
+      const amplitude = radius * 0.001333
       positions[i + 1] += amplitude * Math.sin(Date.now() * 0.001 + i)
     }
 
@@ -70,7 +70,7 @@ export const PortalParticles = ({
         />
       </bufferGeometry>
       <pointsMaterial
-        size={radius * 0.0133}
+        size={radius * 0.005133 * (radius / 15)}
         vertexColors
         transparent
         opacity={0.6}

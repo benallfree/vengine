@@ -14,7 +14,7 @@ interface CollisionState {
   collidablesByKey: Map<string, Collidable>
 }
 
-console.log(`collisionState init`)
+// console.log(`collisionState init`)
 export const collisionState = proxy<CollisionState>({
   collidables: proxyRef([]),
   collidablesByKey: proxyMap<string, Collidable>(),
@@ -29,7 +29,7 @@ const dbg = (msg: string) => {
   )
 }
 subscribe(collisionState, () => {
-  dbg('collisionState update')
+  // dbg('collisionState update')
 })
 
 export const collisionActions = {
@@ -38,33 +38,33 @@ export const collisionActions = {
 
     const key = getObjectIds(ref, onCollide, collidable)
 
-    dbg(`register ${key}`)
+    // dbg(`register ${key}`)
 
     if (collisionState.collidablesByKey.has(key)) {
       throw new Error(`Collidable already registered: ${key}`)
     }
 
     const cleanup = () => {
-      dbg(`cleanup ${key}`)
+      // dbg(`cleanup ${key}`)
       if (!collisionState.collidablesByKey.delete(key)) return
 
       collisionState.collidables = proxyRef(
         collisionState.collidables.filter((c) => {
           const arrayElemId = getObjectIds(c)
           const collidableId = getObjectIds(collidable)
-          console.log(
-            `cleanup ${arrayElemId} ${collidableId}`,
-            c !== collidable
-          )
+          // console.log(
+          //   `cleanup ${arrayElemId} ${collidableId}`,
+          //   c !== collidable
+          // )
           return c !== collidable
         })
       )
-      dbg(`after cleanup ${key} ${collisionState.collidables.length}`)
+      // dbg(`after cleanup ${key} ${collisionState.collidables.length}`)
     }
     collisionState.collidablesByKey.set(key, collidable)
     collisionState.collidables.push(collidable)
 
-    dbg(`after register ${key}`)
+    // dbg(`after register ${key}`)
 
     return cleanup
   },

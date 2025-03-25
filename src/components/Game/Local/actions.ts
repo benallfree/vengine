@@ -1,4 +1,5 @@
-import { Camera, Euler, Vector3 } from 'three'
+import { Camera } from '@react-three/fiber'
+import { Euler, Vector3 } from 'three'
 import { FPS_OFFSET, THIRD_PERSON_OFFSET } from './constants'
 import { CameraMode, localPlayerState } from './state'
 
@@ -10,41 +11,15 @@ const currentOffset = new Vector3()
 const targetOffset = new Vector3()
 const lerpedOffset = new Vector3()
 const moveDirection = new Vector3()
+const playerRotation = new Euler()
 
 export const localPlayerActions = {
   calculateMovement: (camera: Camera, delta: number) => {
-    // Reset movement direction
-    moveDirection.set(0, 0, 0)
+    // Copy camera position to player state
+    localPlayerState.position.copy(camera.position)
 
-    // Get normalized input values
-    const { x, z } = localPlayerState.controls.move
-
-    // Set movement direction from normalized input
-    moveDirection.set(x, 0, z)
-
-    // If no movement, return zero vector
-    if (moveDirection.lengthSq() === 0) return moveDirection
-
-    // Apply camera rotation to movement direction
-    moveDirection.applyQuaternion(camera.quaternion)
-    // Keep movement on the ground plane
-    moveDirection.y = 0
-    // Apply base movement speed and delta time
-    moveDirection.multiplyScalar(BASE_MOVEMENT_SPEED * delta)
-
-    return moveDirection
-  },
-
-  syncPosition: (position: Vector3) => {
-    localPlayerState.position.x = position.x
-    localPlayerState.position.y = position.y
-    localPlayerState.position.z = position.z
-  },
-
-  syncRotation: (rotation: Euler) => {
-    localPlayerState.rotation.x = rotation.x
-    localPlayerState.rotation.y = rotation.y
-    localPlayerState.rotation.z = rotation.z
+    // Copy camera rotation to player state
+    localPlayerState.rotation.copy(camera.rotation)
   },
 
   toggleCameraMode: () => {

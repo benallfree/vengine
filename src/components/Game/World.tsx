@@ -4,7 +4,6 @@ import { Ground } from './Ground'
 import { Lighting } from './Lighting'
 import { InputDevices } from './Local/InputDevices'
 import { LocalPlayer, LocalPlayerHandle } from './Local/LocalPlayer'
-import { MovementSystem } from './Local/MovementSystem'
 import { localPlayerState } from './Local/state'
 import { CollisionSystem } from './Physics/CollisionSystem'
 import { PortalSystem } from './Portals/PortalSystem'
@@ -51,7 +50,6 @@ export const World = () => {
 
   return (
     <>
-      <MovementSystem />
       <CollisionSystem />
       <InputDevices />
       <Sky />

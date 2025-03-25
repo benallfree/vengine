@@ -41,7 +41,7 @@ export const PortalSystem = ({
     }
   }, [isPortalEntry])
 
-  const handleEnterPortal = () => {
+  const handleExitPortal = () => {
     // Create URL for portal.pieter.com
     const portalUrl = new URL('http://portal.pieter.com')
 
@@ -64,7 +64,7 @@ export const PortalSystem = ({
     window.location.href = portalUrl.toString()
   }
 
-  const handleExitPortal = () => {
+  const handleEnterPortal = () => {
     // If we have a ref URL, navigate back to it
     const refUrl = urlParams.get('ref')
     if (refUrl) {

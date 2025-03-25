@@ -8,12 +8,12 @@ export const DEFAULT_SPAWN = {
 } as const
 
 export const ENTER_PORTAL = {
-  position: new Vector3(-20, 2, -30),
+  position: new Vector3(-20, 2, -25),
   rotation: new Euler(0, 0, 0),
 } as const
 
 export const EXIT_PORTAL = {
-  position: new Vector3(20, 15, -30),
+  position: new Vector3(20, 3, -25),
   rotation: new Euler(0, 0, 0),
 } as const
 

@@ -1,7 +1,8 @@
-import { forwardRef, useEffect } from 'react'
+import { useFrame, useThree } from '@react-three/fiber'
+import { forwardRef } from 'react'
 import { EntityState } from '../Entity'
-import { getObjectIds } from '../Physics/objectId'
 import { Player, PlayerHandle, PlayerProps } from '../Player'
+import { localPlayerActions } from './actions'
 
 export interface LocalPlayerHandle extends PlayerHandle {}
 
@@ -11,10 +12,11 @@ export interface LocalPlayerProps extends PlayerProps {
 
 export const LocalPlayer = forwardRef<LocalPlayerHandle, LocalPlayerProps>(
   ({ id = 'local-player', getState }, ref) => {
-    useEffect(() => {
-      const entityId = getObjectIds(ref)
-      console.log(`Local Player ${entityId} created`)
-    }, [])
+    const { camera } = useThree()
+
+    useFrame((_, delta) => {
+      localPlayerActions.calculateMovement(camera, delta)
+    })
 
     return (
       <Player

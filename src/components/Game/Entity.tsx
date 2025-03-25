@@ -38,6 +38,8 @@ export interface Entity {
   placeWith: (other: Entity) => void
   // Move this entity away from another entity in its forward direction until their bounding boxes don't intersect
   separateFrom: (other: Entity, padding?: number) => void
+  // Place the entity on the ground (Y=0) based on its current orientation and bounding box
+  setOnGround: () => void
 }
 
 export interface EntityProps {
@@ -127,6 +129,17 @@ export const Entity = forwardRef<EntityHandle, EntityProps>(
             tempBoxWorld.min.y, // bottom Y
             (tempBoxWorld.min.z + tempBoxWorld.max.z) / 2 // center Z
           )
+        },
+        setOnGround: () => {
+          // Get world-space bounding box
+          tempBox.setFromObject(objectRef.current)
+          tempBoxWorld.copy(tempBox).applyMatrix4(objectRef.current.matrixWorld)
+
+          // Calculate current bottom Y position
+          const currentBottomY = tempBoxWorld.min.y
+
+          // Move the entity down by the current bottom Y position
+          objectRef.current.position.y -= currentBottomY
         },
         placeWith: (other: Entity) => {
           // Get world-space bounding boxes for both entities

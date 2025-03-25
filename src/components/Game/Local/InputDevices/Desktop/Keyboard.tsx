@@ -1,56 +1,49 @@
-import { useEffect, useRef } from 'react'
-import { localPlayerActions } from '../../actions'
-import { localPlayerState } from '../../state'
+import { useKeyboardControls } from '@react-three/drei'
+import { useFrame, useThree } from '@react-three/fiber'
+import { Vector3 } from 'three'
+import { BASE_MOVEMENT_SPEED } from '../../../Player'
 
 const DIAGONAL_MOVEMENT = 0.7071067811865476 // 1/√2, precalculated for performance
 
-const updateMovementFromKeys = (keys: Set<string>) => {
-  const x = (keys.has('KeyD') ? 1 : 0) - (keys.has('KeyA') ? 1 : 0)
-  const z = (keys.has('KeyS') ? 1 : 0) - (keys.has('KeyW') ? 1 : 0)
-
-  // For diagonal movement, both values will be exactly 1, so we can use a constant
-  if (x !== 0 && z !== 0) {
-    localPlayerState.controls.move = {
-      x: x * DIAGONAL_MOVEMENT,
-      z: z * DIAGONAL_MOVEMENT,
-    }
-  } else {
-    localPlayerState.controls.move = { x, z }
-  }
-}
-
 export const Keyboard = () => {
-  const movementKeys = useRef(new Set<string>())
+  const { camera } = useThree()
+  const [subscribeKeys, getKeys] = useKeyboardControls()
 
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (['KeyW', 'KeyS', 'KeyA', 'KeyD'].includes(e.code)) {
-        movementKeys.current.add(e.code)
-        updateMovementFromKeys(movementKeys.current)
-      } else if (e.code === 'KeyV') {
-        // Toggle camera mode with smooth transition
-        localPlayerActions.toggleCameraMode()
-      }
-    }
+  useFrame((_, delta) => {
+    // Get key states directly
+    const forward = getKeys().forward
+    const backward = getKeys().backward
+    const left = getKeys().leftward
+    const right = getKeys().rightward
 
-    const handleKeyUp = (e: KeyboardEvent) => {
-      if (['KeyW', 'KeyS', 'KeyA', 'KeyD'].includes(e.code)) {
-        movementKeys.current.delete(e.code)
-        updateMovementFromKeys(movementKeys.current)
-      }
-    }
+    // Early return if no movement keys are pressed
+    if (!forward && !backward && !left && !right) return
 
-    window.addEventListener('keydown', handleKeyDown)
-    window.addEventListener('keyup', handleKeyUp)
+    // Calculate movement direction
+    const x = (right ? 1 : 0) - (left ? 1 : 0)
+    const z = (backward ? 1 : 0) - (forward ? 1 : 0)
 
-    return () => {
-      window.removeEventListener('keydown', handleKeyDown)
-      window.removeEventListener('keyup', handleKeyUp)
-      movementKeys.current.clear()
-      // Reset movement state on cleanup
-      localPlayerState.controls.move = { x: 0, z: 0 }
-    }
-  }, [])
+    // Apply diagonal movement optimization
+    const moveX = x * (x !== 0 && z !== 0 ? DIAGONAL_MOVEMENT : 1)
+    const moveZ = z * (x !== 0 && z !== 0 ? DIAGONAL_MOVEMENT : 1)
+
+    // Calculate movement based on camera orientation and delta time
+    const speed = BASE_MOVEMENT_SPEED * delta
+    const forwardDir = camera.getWorldDirection(new Vector3())
+    forwardDir.y = 0 // Keep movement on horizontal plane
+    forwardDir.normalize() // Re-normalize after zeroing Y
+
+    const rightDir = new Vector3().crossVectors(
+      forwardDir,
+      new Vector3(0, 1, 0)
+    )
+    rightDir.y = 0 // Keep movement on horizontal plane
+    rightDir.normalize() // Re-normalize after zeroing Y
+
+    // Apply movement (negate moveZ since camera forward is negative Z)
+    camera.position.addScaledVector(forwardDir, -moveZ * speed)
+    camera.position.addScaledVector(rightDir, moveX * speed)
+  })
 
   return null
 }

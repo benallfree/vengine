@@ -2,11 +2,23 @@ import { JoystickOutputData } from 'nipplejs'
 import { proxy } from 'valtio'
 
 type TouchState = {
-  angle: JoystickOutputData['angle'] | null
-  force: number | null
+  move: {
+    angle: JoystickOutputData['angle'] | null
+    force: JoystickOutputData['force'] | null
+  }
+  look: {
+    angle: JoystickOutputData['angle'] | null
+    force: JoystickOutputData['force'] | null
+  }
 }
 
 export const touchState = proxy<TouchState>({
-  angle: null,
-  force: null,
+  move: {
+    angle: null,
+    force: null,
+  },
+  look: {
+    angle: null,
+    force: null,
+  },
 })

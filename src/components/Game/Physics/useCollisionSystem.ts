@@ -25,14 +25,15 @@ export const useCollisionSystem = () => {
       const entityA = a.ref.current
 
       box1.setFromObject(entityA.getObject3D())
+      // console.log(`Entity A: ${entityA.id}`, JSON.stringify(box1))
 
       for (let j = i + 1; j < collidables.length; j++) {
         const b = collidables[j]
         if (!b.ref.current) continue
         if (!b.ref.current.isReady) continue
         const entityB = b.ref.current
-
         box2.setFromObject(entityB.getObject3D())
+        // console.log(`Entity B: ${entityB.id}`, JSON.stringify(box2))
 
         if (box1.intersectsBox(box2)) {
           console.log(`Entity A: ${entityA.id}`, entityA.position)

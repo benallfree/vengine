@@ -1,4 +1,5 @@
-import { proxy } from 'valtio'
+import { Euler, Vector3 } from 'three'
+import { proxy, ref } from 'valtio'
 
 export const CameraMode = {
   FPS: 'fps',
@@ -9,43 +10,23 @@ export type CameraMode = (typeof CameraMode)[keyof typeof CameraMode]
 
 interface LocalPlayerState {
   id: string | null
-  position: { x: number; y: number; z: number }
-  rotation: { x: number; y: number; z: number }
+  position: Vector3
+  rotation: Euler
   camera: {
     mode: CameraMode
     targetMode?: CameraMode
     transitioning: boolean
-    currentOffset: { x: number; y: number; z: number }
-  }
-  controls: {
-    move: {
-      x: number
-      z: number
-    }
-    look: {
-      yaw: number
-      pitch: number
-    }
+    currentOffset: Vector3
   }
 }
 
 export const localPlayerState = proxy<LocalPlayerState>({
   id: null,
-  position: { x: 0, y: 0, z: 0 },
-  rotation: { x: 0, y: 0, z: 0 },
+  position: ref(new Vector3(0, 0, 0)),
+  rotation: ref(new Euler(0, 0, 0)),
   camera: {
-    mode: CameraMode.THIRD_PERSON,
+    mode: CameraMode.FPS,
     transitioning: false,
-    currentOffset: { x: 0, y: 2, z: -5 }, // Initial third-person offset
-  },
-  controls: {
-    move: {
-      x: 0,
-      z: 0,
-    },
-    look: {
-      yaw: 0,
-      pitch: 0,
-    },
+    currentOffset: ref(new Vector3(0, 2, -5)), // Initial third-person offset
   },
 })
