@@ -2,6 +2,8 @@
 
 An open source starter kit specifically tuned for vibe coding and compatibility with the #vibejam 2025 guidelines. vEngine provides a foundation for creating immersive multiplayer experiences with a focus on vibes and real-time interaction.
 
+https://github.com/user-attachments/assets/9e5b7f2f-d578-437c-a694-1aa7cc79232d
+
 🌐 [GitHub Repository](https://github.com/benallfree/vengine)
 
 ## Features
