@@ -104,6 +104,57 @@ Please read our [Contributing Guide](CONTRIBUTING.md) for details on our code of
 - Function factories over classes
 - Format code using `bun run format`
 
+### Key Architectural Decisions
+
+#### React Strict Mode
+
+The application runs in React's Strict Mode (`<React.StrictMode>`), which:
+
+- Helps identify potential problems in the application
+- Double-invokes component functions in development to surface side-effect issues
+- Prepares code for future React features like concurrent rendering
+- Warns about deprecated APIs and patterns
+
+#### Three.js Model Management
+
+The Entity component uses a `getState` pattern for performance optimization:
+
+```typescript
+interface EntityProps {
+  getState?: () => EntityState
+  // ...
+}
+```
+
+This pattern prevents unnecessary recreation of Three.js models by:
+
+- Allowing external state management (e.g., physics, game logic) without component re-renders
+- Using `useFrame` to efficiently sync position/rotation updates
+- Maintaining a stable reference to Three.js objects across renders
+- Reducing garbage collection overhead from vector/matrix calculations
+
+#### State Management with Valtio
+
+vEngine uses Valtio for state management instead of Context or other React state solutions because:
+
+- It provides proxy-based reactivity that's perfect for game state
+- Allows direct mutations which feels more natural for game logic
+- Has special handling for Three.js objects via `ref()` to prevent proxy-related issues
+- Minimal boilerplate compared to Redux or Context
+- Great TypeScript support with automatic type inference
+- Better performance than Context for frequently updating game state
+
+#### CSS-in-TypeScript with Vanilla Extract
+
+The project uses Vanilla Extract for styling because:
+
+- Full TypeScript integration with zero-runtime CSS-in-TS
+- All styles are compiled to static CSS at build time
+- Provides CSS Modules-like scoping by default
+- Enables theme tokens and type-safe design systems
+- Allows sharing constants between TS and CSS
+- Better IDE support with go-to-definition and refactoring
+
 ## License
 
 vEngine is open-source software licensed under the MIT license. See the [LICENSE](LICENSE) file for more details.

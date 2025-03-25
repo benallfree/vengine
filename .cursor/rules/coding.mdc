@@ -4,6 +4,8 @@ globs:
 alwaysApply: true
 ---
 * use early returns
-* use factory functions
+* use render functions instead of classes
+* use factory functions instead of classes
 * use valtio instead of context stores or other react stores
-* use r3f instead of raw ThreeJS
+  * use ref() for Three.js objects in valtio state to prevent proxy errors
+* use r3f instead of raw ThreeJS 

@@ -1,36 +1,40 @@
 import { forwardRef } from 'react'
-import { Mesh } from 'three'
+import { Entity, EntityHandle, EntityProps } from './Entity'
 
 // Player physical dimensions
 export const PLAYER_HEIGHT = 2
-export const PLAYER_RADIUS = 0.5
+export const PLAYER_RADIUS = 0.4
 export const EYE_HEIGHT = PLAYER_HEIGHT * 0.85 // Approximately at eye level
 
 // Player movement
 export const BASE_MOVEMENT_SPEED = 5 // units per second
 
-interface PlayerProps {
-  position?: [number, number, number]
+export interface PlayerProps extends EntityProps {
   color?: string
   height?: number
   radius?: number
 }
 
-export const Player = forwardRef<Mesh, PlayerProps>(
+export interface PlayerHandle extends EntityHandle {}
+
+export const Player = forwardRef<PlayerHandle, PlayerProps>(
   (
     {
-      position = [0, PLAYER_HEIGHT, 0],
+      getState,
+      onCollision,
       color = '#ff0000',
       height = PLAYER_HEIGHT,
       radius = PLAYER_RADIUS,
+      id = 'player',
     },
     ref
   ) => {
     return (
-      <mesh ref={ref} position={position}>
+      <Entity id={id} ref={ref} getState={getState} onCollision={onCollision}>
+        {/* Capsule is oriented along Y-axis, front faces -Z */}
         <capsuleGeometry args={[radius, height, 4]} />
         <meshStandardMaterial color={color} />
-      </mesh>
+      </Entity>
     )
   }
 )

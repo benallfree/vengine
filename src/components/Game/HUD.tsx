@@ -4,7 +4,7 @@ import { gameState } from './state'
 
 export const HUD = () => {
   const snap = useSnapshot(gameState)
-
+  console.log(`HUD render`)
   return (
     <div className={styles.hud}>
       <div className={styles.playerCount}>Players: {snap.playerCount}</div>

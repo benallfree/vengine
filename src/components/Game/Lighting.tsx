@@ -11,8 +11,8 @@ const createLighting = () => {
           castShadow
           shadow-mapSize={[2048, 2048]}
         />
-        <pointLight position={[10, 0, 0]} intensity={0.5} />
-        <pointLight position={[-10, 0, 0]} intensity={0.5} />
+        <pointLight position={[10, 0, 0]} intensity={10.5} />
+        <pointLight position={[-10, 0, 0]} intensity={10.5} />
       </>
     )
   }

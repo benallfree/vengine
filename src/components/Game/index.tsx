@@ -5,6 +5,7 @@ import { IsTouch } from './Utils/DeviceDetection'
 import { World } from './World'
 
 export const Game = () => {
+  console.log(`Game render`)
   return (
     <>
       <Canvas

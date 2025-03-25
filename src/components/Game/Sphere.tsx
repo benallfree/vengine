@@ -18,7 +18,7 @@ export const createSphereTexture = () => {
   context.fillStyle = '#ffffff'
   context.textAlign = 'center'
   context.textBaseline = 'middle'
-  context.fillText('VENGINE', canvas.width / 2, canvas.height / 2)
+  context.fillText('vEngine', canvas.width / 2, canvas.height / 2)
 
   return new THREE.CanvasTexture(canvas)
 }
