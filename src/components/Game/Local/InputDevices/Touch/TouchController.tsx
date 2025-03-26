@@ -42,9 +42,15 @@ export const TouchController = () => {
 
     // Calculate movement direction based on camera orientation
     const speed = MOVE_SPEED * normalizedForce
-    // Left/right controls X, up/down controls Z
-    const moveX = Math.cos(angle) * speed
-    const moveZ = Math.sin(-angle) * speed
+
+    // Get camera's current rotation
+    const cameraYaw = camera.rotation.y
+
+    // Calculate movement relative to camera's orientation
+    // First convert joystick angle to world space by adding camera yaw
+    const worldAngle = angle + cameraYaw
+    const moveX = Math.cos(worldAngle) * speed
+    const moveZ = -Math.sin(worldAngle) * speed
     const moveY = 0 // No vertical movement
 
     camera.position.x += moveX
